@@ -25,14 +25,51 @@ import java.util.Map;
 
 public class TwoSum2 {
 	// best solution log n
-	public static int[] twoSumBest(int[] nums, int target) {
-		for (int i = 0; i < nums.length; i++) {
-			int x = Arrays.binarySearch(nums, target - nums[i]);
-			if (x > 0 && nums[x] + nums[i] == target)
-				return nums[i] != nums[i+1] ?  new int[] { i + 1, x + 1 } : new int[] { i + 1, x + 2 };
+	// high：寻找比target小，但是其右边比target大的坐标
+	// low：寻找比target大，但是左边比target小的坐标
+	public static int[] twoSumBest(int[] numbers, int target) {
+		int low = 0;
+		int high = numbers.length - 1;
+		while (low < high) {
+			if ((numbers[low] + numbers[high]) > target) {
+				int start = low + 1;
+				int end = high;
+				while (start < end) {
+					int mid = (start + end) / 2;
+					if ((numbers[low] + numbers[mid]) > target) {
+						end = mid - 1;
+					} else if ((numbers[low] + numbers[mid]) < target) {
+						start = mid + 1;
+					} else {
+						end = mid;
+						break;
+					}
+				}
+				if ((numbers[low] + numbers[end]) > target)
+					end--;
+				high = end;
+			} else if ((numbers[low] + numbers[high]) < target) {
+				int start = low;
+				int end = high - 1;
+				while (start < end) {
+					int mid = (start + end) / 2;
+					if ((numbers[high] + numbers[mid]) > target) {
+						end = mid - 1;
+					} else if ((numbers[high] + numbers[mid]) < target) {
+						start = mid + 1;
+					} else {
+						end = mid;
+						break;
+					}
+				}
+				if ((numbers[end] + numbers[high]) < target)
+					end++;
+				low = end;
+			} else {
+				break;
+			}
 		}
-
-		throw new IllegalArgumentException("No two sum solution");
+		return new int[] { low + 1, high + 1 };
 	}
 
 	// loop normal
@@ -65,7 +102,7 @@ public class TwoSum2 {
 	}
 
 	public static void main(String[] args) {
-		int[] nums = { 5, 25, 75 };
-		System.out.println(twoSumBest(nums, 100)[1]);
+		int[] nums = { 5, 25, 75, 120 };
+		System.out.println(twoSumBest(nums, 100)[0] + " " + twoSumBest(nums, 100)[1]);
 	}
 }
