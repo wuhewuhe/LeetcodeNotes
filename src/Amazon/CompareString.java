@@ -20,10 +20,46 @@ import org.junit.jupiter.api.Test;
  *         English alphabet letters a to z
  */
 public class CompareString {
+	//revolution
+	public int[] CompareStringRevo(String A, String B) {
+		String[] strA = A.split(","), strB = B.split(",");
+		int[] freq = new int[11];
+		int[] res = new int[strB.length];
+		for(String a : strA) {
+			if(a.length() == 0 || a.equals("")) continue;
+			int[] map = new int[26];
+			int minIndex = 25;
+			for(char c : a.toCharArray()) {
+				map[c - 'a']++;
+				minIndex = Math.min(minIndex, c-'a');
+			}
+			freq[map[minIndex]]++;
+		}
+		
+		//bucket sum
+		for (int i = 1; i < freq.length; i++) {
+			freq[i] += freq[i-1];
+		}
+		
+		int idx = 0;
+		for(String b : strB) {
+			if(b.length() == 0 || b.equals("")) continue;
+			int[] map = new int[26];
+			int minIndex = 25;
+			for(char c : b.toCharArray()) {
+				map[c-'a']++;
+				minIndex = Math.min(minIndex, c-'a');
+			}
+			int tem = map[minIndex];
+			res[idx++] = tem != 0 ? freq[tem-1] : 0;
+		}
+		return res;
+	}
+	
 	//time complex o(n^2)  space complex O(n)
 	public int[] CompareStrings(String A, String B) {
 		String[] strsA = A.split(","), strsB = B.split(",");
-		int lenA = strsA.length, lenB = strsB.length;
+		int lenB = strsB.length;
 		int[] freqs = new int[11]; // the frequency of the smallest char must be less than or equal to 10.
 		int[] res = new int[lenB];
 		for (String s : strsA) {
@@ -64,6 +100,6 @@ public class CompareString {
 	public void test() {
 		String A = "abcd,aabc,bd";
 		String B = "aaa,aa";
-		System.out.println(CompareStrings(A, B)[0] + " " + CompareStrings(A, B)[1]);
+		System.out.println(CompareStringRevo(A, B)[0] + " " + CompareStringRevo(A, B)[1]);
 	}
 }
