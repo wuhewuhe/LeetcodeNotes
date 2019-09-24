@@ -1,5 +1,7 @@
 package Google;
 
+import java.util.stream.IntStream;
+
 import org.junit.Test;
 
 /**
@@ -42,7 +44,6 @@ import org.junit.Test;
  */
 public class WateringFlowers {
 
-
 	// capacity is large enough to full water any single plant
 	public int steps(int[] flowers, int capacity) {
 		if (flowers.length == 0 || flowers == null || capacity == 0)
@@ -79,12 +80,40 @@ public class WateringFlowers {
 		return count;
 	}
 
+	//if capacity not enough for a single plant
+	public int WaterFlower(int[] flowers, int capacity) {
+		if (flowers == null || flowers.length == 0)
+			return 0;
+		if (capacity == 0)
+			return -1;
+		int can = capacity;
+		int count = 1;
+		int i =0;
+		while(IntStream.of(flowers).anyMatch(x -> x>=0)) {
+			if (can < flowers[i]) {
+				flowers[i] -= can;
+				can = capacity;
+				count += 2 * (i+1);
+				flowers[i] -= can;
+				can = flowers[i] < 0 ? Math.abs(flowers[i]) : 0;
+			} else {
+				i++;
+				count++;
+				flowers[i] -= can;
+				can = flowers[i] < 0 ? Math.abs(flowers[i]) : 0;
+			}
+		}
+
+		return count;
+	}
+
 	@Test
 	public void test() {
 		int[] flowers = { 2, 4, 5, 1, 2 };
 		int capacity = 6;
 		System.out.println(wateringPlantsSteps(flowers, capacity));
-		System.out.println(steps(flowers, capacity));
+		int[] nums = { 14, 6 };
+		System.out.println(WaterFlower(nums, capacity));
 	}
 
 }
