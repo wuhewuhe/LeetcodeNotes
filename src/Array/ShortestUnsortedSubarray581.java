@@ -1,5 +1,8 @@
 package Array;
 
+import java.util.Arrays;
+import java.util.Stack;
+
 import org.junit.Test;
 
 /**
@@ -53,9 +56,9 @@ public class ShortestUnsortedSubarray581 {
 	}
 
 	/*
-	 * make sure the shortest subarray means that we should know the left and righr boundary
-	 * 
-	 * */
+	 * make sure the shortest subarray means that we should know the left and righr
+	 * boundary time complex n^2 space complex o(1)
+	 */
 	public int FindUnsortedSubarray(int[] nums) {
 		int right = 0, left = nums.length;
 		for (int i = 0; i < nums.length; i++) {
@@ -69,9 +72,108 @@ public class ShortestUnsortedSubarray581 {
 		return right - left > 0 ? right - left + 1 : 0;
 	}
 
+	/*
+	 * using array sorted and then compare these time complex o(nlogn) space complex
+	 * o(n)
+	 */
+	public int FindUnsortedSubarray2(int[] nums) {
+		int[] copy = nums.clone();
+		Arrays.sort(nums);
+		int left = nums.length, right = 0;
+		for (int i = 0; i < copy.length; i++) {
+			if (copy[i] != nums[i]) {
+				left = Math.min(left, i);
+				right = Math.max(right, i);
+			}
+		}
+		return right - left > 0 ? right - left + 1 : 0;
+	}
+
+	/*
+	 * Monastic stack we need determine the correct position of minimum and maximum
+	 * element in the unsorted subarray make use of stack, we traverse over the nums
+	 * array starting from begining, as we go on facing elements in ascending order
+	 * we keep on pushing element indice over the stack. When encounter a failling
+	 * slope, we pop a element form a stack until correspond his correct indice
+	 * 
+	 */
+	public int FindUnsortedSubarray3(int[] nums) {
+		if (nums.length < 2)
+			return 0;
+		Stack<Integer> stack = new Stack<Integer>();
+		int left = nums.length, right = 0;
+		for (int i = 0; i < nums.length; i++) {
+			while (!stack.isEmpty() && nums[stack.peek()] > nums[i])
+				left = Math.min(left, stack.pop());
+			stack.push(i);
+		}
+		stack.clear();
+		for (int i = nums.length - 1; i >= 0; i--) {
+			while (!stack.isEmpty() && nums[stack.peek()] < nums[i])
+				right = Math.max(right, stack.pop());
+			stack.push(i);
+		}
+		return right - left > 0 ? right - left + 1 : 0;
+	}
+
+	// change while and use i --
+	public int FindUnsortedSubarray4(int[] nums) {
+		if (nums.length < 2)
+			return 0;
+		Stack<Integer> stack = new Stack<Integer>();
+		int left = nums.length - 1, right = 0;
+		for (int i = 0; i < nums.length; i++) {
+			if (stack.isEmpty() || nums[stack.peek()] <= nums[i])
+				stack.push(i);
+			else {
+				left = Math.min(left, stack.pop());
+				i--;
+			}
+		}
+		stack.clear();
+		for (int i = nums.length - 1; i >= 0; i--) {
+			if (stack.isEmpty() || nums[stack.peek()] >= nums[i])
+				stack.push(i);
+			else {
+				right = Math.max(right, stack.pop());
+				i++;
+			}
+		}
+		return right - left > 0 ? right - left + 1 : 0;
+	}
+
+	// without using extra space
+	public int FindUnsortedSubarray5(int[] nums) {
+		int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+		boolean flag = false;
+		for (int i = 1; i < nums.length; i++) {
+			if (nums[i] < nums[i - 1])
+				flag = true;
+			if (flag)
+				min = Math.min(min, nums[i]);
+		}
+		flag = false;
+		for (int i = nums.length - 2; i >= 0; i--) {
+			if (nums[i] > nums[i + 1])
+				flag = true;
+			if (flag)
+				max = Math.max(max, nums[i]);
+		}
+		int left, right;
+		for (left = 0; left < nums.length; left++) {
+			if (min < nums[left])
+				break;
+		}
+		for (right = nums.length - 1; right >= 0; right--) {
+			if (max > nums[right])
+				break;
+		}
+		return right - left < 0 ? 0 : right - left + 1;
+	}
+
 	@Test
 	public void test() {
 		int[] nums = { 2, 6, 4, 8, 10, 9, 15 };
-		System.out.println(FindUnsortedSubarray(nums));
+		System.out.println(FindUnsortedSubarray5(nums));
 	}
 }
