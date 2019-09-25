@@ -24,10 +24,15 @@ import org.junit.Test;
  *         can rob = 2 + 9 + 1 = 12.
  */
 public class HouseRober198 {
+
 	public int HouseRobber(int[] nums) {
+		if (nums.length == 0 || nums == null)
+			return 0;
+		if (nums.length == 1)
+			return nums[0];
 		int[] dp = new int[nums.length];
 		dp[0] = nums[0];
-		dp[1] = nums[1];
+		dp[1] = Math.max(nums[0], nums[1]);
 		for (int i = 2; i < nums.length; i++) {
 			int tem = dp[i - 2] + nums[i];
 			dp[i] = Math.max(dp[i - 1], tem);
@@ -36,9 +41,82 @@ public class HouseRober198 {
 		return max;
 	}
 
+	
+	//dp bottom up 
+	public int HouseRobber2(int[] nums) {
+		if (nums.length == 0 || nums == null)
+			return 0;
+		if (nums.length == 1)
+			return nums[0];
+		int[] dp = new int[nums.length];
+		dp[0] = nums[0];
+		dp[1] = Math.max(nums[0], nums[1]);
+		for (int i = 2; i < nums.length; i++) {
+			dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[i]);
+		}
+		return Math.max(dp[dp.length - 1], dp[dp.length - 2]);
+	}
+
+	// Method3()- ****most efficient solution****
+	// time complexity - O(n)
+	// space complexity - O(1)
+	public int HouseRobber3(int[] nums) {
+		if (nums.length == 0 || nums == null)
+			return 0;
+		if (nums.length == 1)
+			return nums[0];
+		int prev2 = nums[0], prev1 = Math.max(nums[0], nums[1]);
+		for (int i = 2; i < nums.length; i++) {
+			int tem = prev1;
+			prev1 = Math.max(prev2 + nums[i], prev1);
+			prev2 = tem;
+		}
+		return prev1;
+	}
+
+//	// memorization
+//	public int HouseRobber3(int[] nums) {
+//
+//	}
+
+	// no dp, just understanding for question
+	public int HouseRobber4(int[] nums) {
+		if (nums.length == 0 || nums == null)
+			return 0;
+		if (nums.length == 1)
+			return nums[0];
+		int prev = nums[0], max = 0;
+		for (int i = 1; i < nums.length; i++) {
+			int temp = prev;
+			prev = max + nums[i];
+			max = Math.max(temp, max);
+		}
+		return Math.max(max, prev);
+	}
+	
+	int cache[];
+	
+	//recursion
+	public int HouseRobber5(int[] nums, int i) {
+		if (nums.length == 0 || nums == null)
+			return 0;
+		if (nums.length == 1)
+			return nums[0];
+		if(i<0) return 0;
+		if(cache[i] != 0)
+			return cache[i];
+		int ith_house_select = HouseRobber5(nums, i-2) + nums[i];
+		int ith_house_not_select = HouseRobber5(nums, i-1);
+		return cache[i] = Math.max(ith_house_select, ith_house_not_select);
+	}
+
 	@Test
 	public void test() {
-		int[] nums = { 2,7,9,3,1 };
-		System.out.println(HouseRobber(nums));
+		int[] nums = { 2, 7, 9, 3, 1 };
+		System.out.println(HouseRobber4(nums));
+		
+		cache = new int[nums.length + 1];
+		System.out.println("robM2A1 result:" + HouseRobber5(nums, nums.length - 1));
 	}
+
 }
