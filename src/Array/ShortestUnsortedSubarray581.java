@@ -16,6 +16,22 @@ import org.junit.Test;
  *         Then length of the input array is in range [1, 10,000]. The input
  *         array may contain duplicates, so ascending order here means <=.
  */
+/**
+ * @author he.wu
+ *
+ */
+/**
+ * @author he.wu
+ *
+ */
+/**
+ * @author he.wu
+ *
+ */
+/**
+ * @author he.wu
+ *
+ */
 public class ShortestUnsortedSubarray581 {
 
 	// approach brute force
@@ -50,24 +66,27 @@ public class ShortestUnsortedSubarray581 {
 		}
 		return res;
 	}
-	
-	 public int findUnsortedSubarray2(int[] nums) {
-	        int l = nums.length, r = 0;
-	        for (int i = 0; i < nums.length - 1; i++) {
-	            for (int j = i + 1; j < nums.length; j++) {
-	                if (nums[j] < nums[i]) {
-	                    r = Math.max(r, j);
-	                    l = Math.min(l, i);
-	                }
-	            }
-	        }
-	        return r - l < 0 ? 0 : r - l + 1;
-	    }
 
+	/*
+	 * make sure the shortest subarray means that we should know the left and righr boundary
+	 * 
+	 * */
+	public int FindUnsortedSubarray(int[] nums) {
+		int right = 0, left = nums.length;
+		for (int i = 0; i < nums.length; i++) {
+			for (int j = i + 1; j < nums.length; j++) {
+				if (nums[i] > nums[j]) {
+					left = Math.min(left, i);
+					right = Math.max(right, j);
+				}
+			}
+		}
+		return right - left > 0 ? right - left + 1 : 0;
+	}
 
 	@Test
 	public void test() {
-		int[] nums = {2,6,4,8,10,9,15};
-		System.out.println(findUnsortedSubarray2(nums));
+		int[] nums = { 2, 6, 4, 8, 10, 9, 15 };
+		System.out.println(FindUnsortedSubarray(nums));
 	}
 }
