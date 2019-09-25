@@ -115,7 +115,7 @@ public class HouseRober198 {
 		int[] nums = { 2, 7, 9, 3, 1 };
 		System.out.println(HouseRobber4(nums));
 		
-		cache = new int[nums.length + 1];
+		cache = new int[nums.length];
 		System.out.println("robM2A1 result:" + HouseRobber5(nums, nums.length - 1));
 	}
 
