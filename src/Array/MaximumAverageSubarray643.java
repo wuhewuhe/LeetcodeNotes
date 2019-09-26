@@ -19,8 +19,15 @@ import org.junit.Test;
  *         range [-10,000, 10,000].
  */
 public class MaximumAverageSubarray643 {
-	
-	//cumulative sum
+
+	// cumulative sum time o(n) space o(n)
+	/*
+	 * We know that in order to obtain the averages of subarrays with length k, we
+	 * need to obtain the sum of these kk length subarrays sum[i] - sum[i-k],by
+	 * doing more one iteration over the sum array, and determine the maximum
+	 * average
+	 * 
+	 */
 	public double FindMaxAverage(int[] nums, int k) {
 		int[] sum = new int[nums.length];
 		sum[0] = nums[0];
@@ -33,10 +40,23 @@ public class MaximumAverageSubarray643 {
 		return res;
 	}
 
+	public double FindMaxAverage2(int[] nums, int k) {
+		double sum = 0;
+		for (int i = 0; i < k; i++) {
+			sum+=nums[i];
+		}
+		double res = sum;
+		for(int i =k;i<nums.length;i++) {
+			sum += (nums[i] - nums[i-k]);
+			res =Math.max(sum, res);
+		}
+		return res/4;
+	}
+
 	@Test
 	public void test() {
 		int[] nums = { 1, 12, -5, -6, 50, 3 };
 		int k = 4;
-		System.out.println(FindMaxAverage(nums, k));
+		System.out.println(FindMaxAverage2(nums, k));
 	}
 }
