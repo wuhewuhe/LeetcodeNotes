@@ -5,6 +5,8 @@ import java.util.Arrays;
 import org.junit.Test;
 
 public class ArrayClosetTo0 {
+	
+	//time o(nlogn) space o(1)
 	public int ClosetToZero(int[] nums) {
 		Arrays.sort(nums);
 		int near = Integer.MAX_VALUE;
