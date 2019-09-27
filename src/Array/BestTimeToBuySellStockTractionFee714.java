@@ -1,6 +1,5 @@
 package Array;
 
-import java.util.Stack;
 
 import org.junit.Test;
 
@@ -26,9 +25,11 @@ import org.junit.Test;
  */
 public class BestTimeToBuySellStockTractionFee714 {
 
-	//dp time o(n) space o(n) 
-	//sold: no stock in my hand maximum revenue: two possible(keep state or sell stock today)
-	//hold: have stock in my hand maximum revenue: two possible(keep state or buy stock today) 
+	// dp time o(n) space o(n)
+	// sold: no stock in my hand maximum revenue: two possible(keep state or sell
+	// stock today)
+	// hold: have stock in my hand maximum revenue: two possible(keep state or buy
+	// stock today)
 	public int MaxProfit(int[] prices, int fee) {
 		if (prices == null || prices.length == 0)
 			return 0;
@@ -46,8 +47,8 @@ public class BestTimeToBuySellStockTractionFee714 {
 		return sold[prices.length - 1];
 	}
 
-	//alter greedy algorithm
-	//time o(n) space o(1)
+	// alter greedy algorithm
+	// time o(n) space o(1)
 	public int MaxProfit2(int[] prices, int fee) {
 		if (prices == null || prices.length == 0)
 			return 0;
@@ -67,12 +68,21 @@ public class BestTimeToBuySellStockTractionFee714 {
 				max = prices[i];
 			}
 		}
-		return sum+profit;
+		return sum + profit;
+	}
+
+	public int MaxProfit3(int[] prices, int fee) {
+		int sold = 0, hold = -prices[0];
+		for (int i = 0; i < prices.length; i++) {
+			sold = Math.max(sold, hold+prices[i]-fee);
+			hold = Math.max(hold, sold - prices[i]);
+		}
+		return sold;
 	}
 
 	@Test
 	public void test() {
 		int[] prices = { 1, 3, 2, 8, 4, 9 };
-		System.out.println(MaxProfit2(prices, 2));
+		System.out.println(MaxProfit(prices, 2));
 	}
 }
