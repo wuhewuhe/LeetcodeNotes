@@ -1,7 +1,5 @@
 package Array;
 
-import java.util.Arrays;
-
 import org.junit.Test;
 
 /**
@@ -30,19 +28,21 @@ public class HouseRober198 {
 			return 0;
 		if (nums.length == 1)
 			return nums[0];
-		int[] dp = new int[nums.length];
-		dp[0] = nums[0];
-		dp[1] = Math.max(nums[0], nums[1]);
-		for (int i = 2; i < nums.length; i++) {
-			int tem = dp[i - 2] + nums[i];
-			dp[i] = Math.max(dp[i - 1], tem);
+		int[] robberies = new int[nums.length];
+		for (int i = 0; i < nums.length; i++) {
+			robberies[i] = nums[i];
+			for (int j = i - 2; j >= 0; j--) {
+				robberies[i] = Math.max(robberies[i], nums[i] + robberies[j]);
+			}
 		}
-		int max = Arrays.stream(dp).max().getAsInt();
+		int max = Integer.MIN_VALUE;
+		for (int i : robberies) {
+			max = Math.max(i, max);
+		}
 		return max;
 	}
 
-	
-	//dp bottom up 
+	// dp bottom up
 	public int HouseRobber2(int[] nums) {
 		if (nums.length == 0 || nums == null)
 			return 0;
@@ -65,58 +65,42 @@ public class HouseRober198 {
 			return 0;
 		if (nums.length == 1)
 			return nums[0];
-		int prev2 = nums[0], prev1 = Math.max(nums[0], nums[1]);
-		for (int i = 2; i < nums.length; i++) {
-			int tem = prev1;
-			prev1 = Math.max(prev2 + nums[i], prev1);
-			prev2 = tem;
+		int prev2 = 0, prev1 = 0;
+		for (int i = 0; i < nums.length; i++) {
+			int tem = Math.max(prev2+nums[i], prev1);
+			prev2 = prev1;
+			prev1 = tem;
 		}
 		return prev1;
 	}
 
-//	// memorization
-//	public int HouseRobber3(int[] nums) {
-//
-//	}
+	int[] dp;
 
-	// no dp, just understanding for question
-	public int HouseRobber4(int[] nums) {
-		if (nums.length == 0 || nums == null)
+	public int rob(int[] nums) {
+		if (nums == null || nums.length == 0)
 			return 0;
 		if (nums.length == 1)
 			return nums[0];
-		int prev = nums[0], max = 0;
-		for (int i = 1; i < nums.length; i++) {
-			int temp = prev;
-			prev = max + nums[i];
-			max = Math.max(temp, max);
-		}
-		return Math.max(max, prev);
+		dp = new int[nums.length];
+		return HouseRobber4(nums, nums.length - 1);
 	}
-	
-	int cache[];
-	
-	//recursion
-	public int HouseRobber5(int[] nums, int i) {
-		if (nums.length == 0 || nums == null)
+
+	// memorization + recursion
+	public int HouseRobber4(int[] nums, int i) {
+		if (i < 0)
 			return 0;
-		if (nums.length == 1)
-			return nums[0];
-		if(i<0) return 0;
-		if(cache[i] != 0)
-			return cache[i];
-		int ith_house_select = HouseRobber5(nums, i-2) + nums[i];
-		int ith_house_not_select = HouseRobber5(nums, i-1);
-		return cache[i] = Math.max(ith_house_select, ith_house_not_select);
+		if (dp[i] != 0)
+			return dp[i];
+		int ith_house_is_selected = HouseRobber4(nums, i - 2) + nums[i];
+		int ith_house_is_not_selected = HouseRobber4(nums, i - 1);
+		return dp[i] = Math.max(ith_house_is_selected, ith_house_is_not_selected);
 	}
 
 	@Test
 	public void test() {
-		int[] nums = { 2, 7, 9, 3, 1 };
-		System.out.println(HouseRobber4(nums));
-		
-		cache = new int[nums.length];
-		System.out.println("robM2A1 result:" + HouseRobber5(nums, nums.length - 1));
+		int[] nums = { 2, 1, 1, 2 };
+		System.out.println(HouseRobber3(nums));
+
 	}
 
 }

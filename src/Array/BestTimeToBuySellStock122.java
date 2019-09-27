@@ -34,7 +34,7 @@ public class BestTimeToBuySellStock122 {
 	@Test
 	public void test() {
 		int[] nums = { 7, 1, 5, 3, 6, 4 };
-		System.out.println(MaxProfit(nums));
+		System.out.println(MaxProfit3(nums));
 	}
 
 	// brute force deep recursive, find all possibility and compare the max
@@ -77,6 +77,17 @@ public class BestTimeToBuySellStock122 {
 				i++;
 			peak = prices[i];
 			maxprofit += peak - valley;
+		}
+		return maxprofit;
+	}
+
+	// single one pass
+	//transaction more than the last method, greedy algorithm
+	public int MaxProfit3(int[] prices) {
+		int maxprofit = 0;
+		for (int i = 1; i < prices.length; i++) {
+			if (prices[i] > prices[i - 1])
+				maxprofit += prices[i] - prices[i - 1];
 		}
 		return maxprofit;
 	}
