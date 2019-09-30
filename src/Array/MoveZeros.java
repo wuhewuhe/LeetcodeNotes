@@ -18,6 +18,19 @@ import org.junit.Test;
  */
 public class MoveZeros {
 
+	// best solution
+	public static void MoveZero4(int[] nums) {
+		int zero = 0;
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] != 0) {
+				int temp = nums[zero];
+				nums[zero] = nums[i];
+				nums[i] = temp;
+				zero++;
+			}
+		}
+	}
+
 	// can not desorder
 	public static void moveZeroes(int[] nums) {
 		if (nums.length == 0 || nums == null)
@@ -53,21 +66,21 @@ public class MoveZeros {
 	public static void moveZeroes3(int[] nums) {
 		for (int zero = 0, i = 0; i < nums.length; i++) {
 			if (nums[i] != 0) {
-				swap(nums[zero++],nums[i]);
+				swap(nums[zero++], nums[i]);
 			}
 		}
 	}
 
 	private static void swap(int i, int j) {
 		// TODO Auto-generated method stub
-		int tem = i+j;
+		int tem = i + j;
 		j = tem - j;
 		i = tem - i;
 	}
 
 	public static void main(String[] args) {
-		int[] nums = { 0, 1, 0, 3, 12 };
-		moveZeroes3(nums);
+		int[] nums = { 0, 1, 0, 3 };
+		MoveZero4(nums);
 		for (int i : nums) {
 			System.out.println(i);
 		}
