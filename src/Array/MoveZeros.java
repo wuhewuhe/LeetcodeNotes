@@ -2,8 +2,6 @@ package Array;
 
 import java.util.Arrays;
 
-import org.junit.Test;
-
 /**
  * @author he.wu Given an array nums, write a function to move all 0's to the
  *         end of it while maintaining the relative order of the non-zero
@@ -19,7 +17,7 @@ import org.junit.Test;
 public class MoveZeros {
 
 	// best solution
-	public static void MoveZero4(int[] nums) {
+	public static void MoveZero3(int[] nums) {
 		int zero = 0;
 		for (int i = 0; i < nums.length; i++) {
 			if (nums[i] != 0) {
@@ -53,7 +51,7 @@ public class MoveZeros {
 		}
 	}
 
-	public static void moveZeroes2(int[] nums) {
+	public static void MoveZeroes2(int[] nums) {
 		int zero = 0;
 		for (int i = 0; i < nums.length; i++) {
 			if (nums[i] != 0)
@@ -63,26 +61,12 @@ public class MoveZeros {
 			nums[i] = 0;
 	}
 
-	public static void moveZeroes3(int[] nums) {
-		for (int zero = 0, i = 0; i < nums.length; i++) {
-			if (nums[i] != 0) {
-				swap(nums[zero++], nums[i]);
-			}
-		}
-	}
-
-	private static void swap(int i, int j) {
-		// TODO Auto-generated method stub
-		int tem = i + j;
-		j = tem - j;
-		i = tem - i;
-	}
-
 	public static void main(String[] args) {
-		int[] nums = { 0, 1, 0, 3 };
-		MoveZero4(nums);
+		int[] nums = { 0,2,1,0 };
+		MoveZeroes2(nums);
 		for (int i : nums) {
 			System.out.println(i);
 		}
 	}
+
 }

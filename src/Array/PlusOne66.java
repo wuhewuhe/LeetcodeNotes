@@ -45,10 +45,30 @@ public class PlusOne66 {
 		return newNumber;
 	}
 
+	public int[] PlusOne(int[] digits) {
+		if (digits == null || digits.length == 0)
+			throw new IllegalArgumentException("No solution");
+		if (digits.length == 1) {
+			digits[0] += 1;
+			return digits;
+		}
+		for (int i = digits.length - 1; i >= 0; i--) {
+			if(digits[i]<9)
+			{
+				digits[i]+=1;
+				return digits;
+			}
+			else digits[i] = 0;
+		}
+		int[] number = new int[digits.length+1];
+		number[0] = 1;
+		return number;
+	}
+
 	@Test
 	public void test() {
 		int[] ar = { 2, 9 };
-		System.out.println(plusOne(ar));
+		System.out.println(PlusOne(ar));
 
 	}
 

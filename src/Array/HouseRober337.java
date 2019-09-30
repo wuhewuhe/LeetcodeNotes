@@ -1,5 +1,7 @@
 package Array;
 
+import org.junit.Test;
+
 /**
  * @author he.wu The thief has found himself a new place for his thievery again.
  *         There is only one entrance to this area, called the "root." Besides
@@ -36,5 +38,17 @@ package Array;
  *         + 5 = 9.
  */
 public class HouseRober337 {
+	
+	public int Rob(int[] nums)
+	{
+		if(nums.length == 0) return 0;
+		if(nums.length == 1) return nums[0];
+		return 0;
+	}
+	
+	@Test
+	public void test() {
+		
+	}
 
 }

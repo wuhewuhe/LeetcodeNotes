@@ -1,8 +1,6 @@
 package Array;
 
 import java.util.Arrays;
-import java.util.Iterator;
-
 import org.junit.Test;
 
 /**
