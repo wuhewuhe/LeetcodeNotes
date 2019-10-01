@@ -84,7 +84,7 @@ public class IntersectionOfTwoArrays350 {
 		System.out.println(Intersection(nums1, nums2));
 
 		// best way for java convert list to array
-		List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6);
-		int[] arr = list.stream().mapToInt(x -> x).toArray();
+//		List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6);
+//		int[] arr = list.stream().mapToInt(x -> x).toArray();
 	}
 }

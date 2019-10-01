@@ -1,5 +1,7 @@
 package Math;
 
+import org.junit.Test;
+
 /**
  * @author mac Every non-negative integer N has a binary representation. For
  *         example, 5 can be represented as "101" in binary, 11 as "1011" in
@@ -37,5 +39,21 @@ public class ComplementoBase10Integer1009 {
         }
         
         return ((1 << bit_count) - 1) ^ n; 
+	}
+	
+	 public int bitwiseComplement2(int N) {
+	        if (N == 0) return 1;
+	        if (N == 1) return 0;
+	        int x = 1;
+	        while(x<= N){
+	             x = x << 1;  // equialently written as x*=2;
+	        }
+	        return N ^ (x-1);
+	    }
+	
+	 
+	@Test
+	public void test() {
+		System.out.println(Integer.toBinaryString(15));
 	}
 }
