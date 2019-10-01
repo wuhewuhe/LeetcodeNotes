@@ -55,5 +55,6 @@ public class ComplementoBase10Integer1009 {
 	@Test
 	public void test() {
 		System.out.println(Integer.toBinaryString(15));
+		System.out.println(~-6);
 	}
 }
