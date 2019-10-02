@@ -61,30 +61,40 @@ public class LongestPalindromeSubstring5 {
 		return longestPalindrome;
 	}
 
-	// two pointer
-	public String longestPalindrome3(String s) {
-		if (s == null || s.length() == 0)
-			return "";
-		if (s.length() == 1)
+	// manachar algo
+	
+
+	private int max = 0;
+	private String sub = "";
+
+	public String longestPalindrome4(String s) {
+		int len = s.length();
+		if (len < 2)
 			return s;
-		String longest = new String();
-		for (int i = 0; i < s.length(); i++) {
-			String s1 = palinLength(s, i, i);
-			String s2 = palinLength(s, i, i + 1);
-			String longer = s1.length() > s2.length() ? s1 : s2;
-			longest = longer.length() > longest.length() ? longer : longest;
+
+		for (int i = 0; i < len - 1; i++)// assume index not out off range
+		{
+			extendPalindrome(s, i, i); // assume odd length, try to extend Palindrome as possible
+			extendPalindrome(s, i, i + 1); // assume even length.
 		}
-		return longest;
+		return sub;
 	}
 
-	private String palinLength(String s, int i, int j) {
-		// TODO Auto-generated method stub
-		return null;
+	private void extendPalindrome(String s, int j, int k) {
+		while (j >= 0 && k < s.length() && s.charAt(j) == s.charAt(k)) {
+			if (k - j + 1 > max) {
+				max = k-j+1;
+				sub = s.substring(j,k+1);
+			}
+			j--;
+			k++;
+		}
+
 	}
 
 	@Test
 	public void test() {
-		String s = "";
-		System.out.println(longestPalindrome(s));
+		String s = "aca";
+		System.out.println(longestPalindrome4(s));
 	}
 }
