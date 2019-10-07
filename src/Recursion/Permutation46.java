@@ -21,14 +21,14 @@ public class Permutation46 {
 		if(nums.length == 0 || nums == null) return null;
 		boolean[] bool = new boolean[nums.length];
 		List<Integer> tem = new ArrayList<Integer>();
-		List<List<Integer>> res = new ArrayList<>();
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		dfs(res,nums,tem,bool);
 		return res;
 	}
 
 	private void dfs(List<List<Integer>> res, int[] nums, List<Integer> tem, boolean[] bool) {
 		if(tem.size() == nums.length)
-			res.add(new ArrayList<>(tem));
+			res.add(new ArrayList<Integer>(tem));
 		for (int i = 0; i < nums.length; i++) {
 			if(!bool[i]) {
 				tem.add(nums[i]);
