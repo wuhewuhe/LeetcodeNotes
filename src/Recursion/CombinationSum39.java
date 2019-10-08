@@ -1,6 +1,11 @@
 package Recursion;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+
+import org.junit.Test;
 
 /**
  * @author mac Given a set of candidate numbers (candidates) (without
@@ -27,7 +32,29 @@ import java.util.List;
  */
 public class CombinationSum39 {
 	public List<List<Integer>> combinationSum(int[] candidates, int target) {
-		return null;
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		if (candidates == null || candidates.length == 0)
+			return res;
+		Arrays.sort(candidates);
+		helper(res, candidates, new ArrayList<Integer>(), target, 0,0);
+		return res;
 
+	}
+
+	private void helper(List<List<Integer>> res, int[] candidates, ArrayList<Integer> tem, int target, int start,int sum) {
+		if (target == sum)
+			res.add(new ArrayList<Integer>(tem));
+		for (int i = start; i < candidates.length; i++) {
+			if(sum+candidates[i]>target) break;
+			tem.add(candidates[i]);
+			helper(res, candidates, tem, target, i, sum+candidates[i]);
+			tem.remove(tem.size() - 1);
+		}
+	}
+
+	@Test
+	public void test() {
+		int[] nums = { 2, 3, 6, 7 };
+		System.out.println(combinationSum(nums,7));
 	}
 }
