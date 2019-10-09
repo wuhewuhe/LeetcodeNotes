@@ -3,6 +3,8 @@ package Array;
 import org.junit.Test;
 
 public class LongestContinuousIncreasingSubsequence674 {
+	
+	//time o(n) space o(n)
 	public int findLengthOfLCIS(int[] nums) {
 		if (nums == null || nums.length == 0)
 			return 0;
@@ -20,6 +22,8 @@ public class LongestContinuousIncreasingSubsequence674 {
 		return max;
 	}
 
+	
+	
 	@Test
 	public void test() {
 		int[] nums = { 1, 3, 5, 4, 7 };
