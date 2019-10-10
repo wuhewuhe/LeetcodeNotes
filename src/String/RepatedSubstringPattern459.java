@@ -1,5 +1,7 @@
 package String;
 
+import org.junit.Test;
+
 /**
  * @author mac Given a non-empty string check if it can be constructed by taking
  *         a substring of it and appending multiple copies of the substring
@@ -19,10 +21,9 @@ package String;
  *         "abc" four times. (And the substring "abcabc" twice.)
  */
 public class RepatedSubstringPattern459 {
-	public boolean repeatedSubstringPattern(String s) {
-		if(s.length() == 0 || s == "") return true;
-		for (int i = 0; i < s.length(); i++) {
-			
-		}
+
+	@Test
+	public void test() {
+
 	}
 }

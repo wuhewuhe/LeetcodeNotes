@@ -37,34 +37,73 @@ public class ImplementStrstr28 {
 		}
 		return -1;
 	}
-	
-	//kmp pattern matching solution
-	public int strStr3(String haystack, String needle) {
-		 // empty needle appears everywhere, first appears at 0 index
-        if (needle.length() == 0)
-            return 0;
-        if (haystack.length() == 0)
-            return -1;
-        
-        
-        for (int i = 0; i < haystack.length(); i++) {
-            // no enough places for needle after i
-            if (i + needle.length() > haystack.length()) break;
-            
-            for (int j = 0; j < needle.length(); j++) {
-                if (haystack.charAt(i+j) != needle.charAt(j))
-                    break;
-                if (j == needle.length()-1)
-                    return i;
-            }
-        }
-        
-        return -1;
+
+	public void prefixtable(char[] pattern, int[] prefix, int n) {
+		prefix[0] = 0;
+		int len = 0;
+		int i = 1;
+		while (i < n) {
+			if (pattern[len] == pattern[i]) {
+				len++;
+				prefix[i] = len;
+				i++;
+			} else {
+				if (len > 0)
+					len = prefix[len - 1];
+				else {
+					prefix[i] = len;
+					i++;
+				}
+			}
+		}
 	}
-	
+
+	public void move(int[] prefix, int n) {
+		int i;
+		for (i = n - 1; i > 0; i--) {
+			prefix[i] = prefix[i - 1];
+		}
+		prefix[0] = -1;
+	}
+
+	public int kmp_search(char[] text, char[] pattern) {
+
+		int n = pattern.length;
+		int[] prefix = new int[pattern.length];
+		prefixtable(pattern, prefix, n);
+		move(prefix, n);
+
+		// text[i] len(text) = m
+		// pattern[j] len(pattern) = n
+		int i = 0, m = text.length;
+		int j = 0;
+		while (i < m) {
+			if (j == n - 1 && text[i] == pattern[j]) {
+				// System.out.println("found" + (i-j));
+				//j = prefix[j];
+				return i-j;
+			}
+			if (text[i] == pattern[j]) {
+				i++;
+				j++;
+			} else {
+				j = prefix[j];
+				if (j == -1) {
+					i++;
+					j++;
+				}
+			}
+		}
+		return -1;
+	}
+
+	public int strStr3(String haystack, String needle) {
+		if(needle.isEmpty()) return 0;
+		return kmp_search(haystack.toCharArray(), needle.toCharArray());
+	}
 
 	@Test
 	public void test() {
-		System.out.println(strStr2("hello", "ll"));
+		System.out.println(strStr3("hello", "ll"));
 	}
 }
