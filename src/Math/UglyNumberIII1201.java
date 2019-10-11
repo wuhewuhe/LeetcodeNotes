@@ -33,31 +33,55 @@ import org.junit.Test;
  *         1999999984
  */
 public class UglyNumberIII1201 {
-	public int nthUglyNumber(int n, int a, int b, int c) {
-		int i =1;
-		int ia = 0, ib = 0,ic =0;
-		int[] ugly = new int[n+1];
-		ugly[0] = 1;
-		while(i<=n) {
-			ugly[i] = Math.min(ugly[ia] * a, Math.min(ugly[ib] * b, ugly[ic] * c));
-			if (ugly[i] == ugly[ia] * a) {
-                ia++;
-            }
-            if (ugly[i] == ugly[ib] * b) {
-                ib++;
-            }
-            if (ugly[i] == ugly[ic] * 5) {
-                ic++;
-            }
-            i++;
-		}
-		return ugly[n];
+	// lcm leatest common multiple 最小公倍数 gcd greatest common divisor 最大公约数
+
+	// find gcd use recursion
+	public int GCD(int a, int b) {
+		if (a == 0)
+			return b;
+		if (b == 0)
+			return a;
+		if (a == b)
+			return a;
+		return a > b ? GCD(a - b, b) : GCD(a, b - a);
 	}
-	
-	//binary search
-	
+
+	public int gcd(int a, int b) {
+		if (a == b)
+			return a;
+		if (a < b) {
+			int tem = a;
+			a = b;
+			b = tem;
+		}
+		return a % b == 0 ? b : gcd(a, a % b);
+	}
+
+	public int lcm(int a, int b) {
+		return (a * b) / gcd(a, b);
+	}
+
+	private int count(int a, int b, int c, int num) {
+		return ((num / a) + (num / b) + (num / c) - (num / lcm(a, b)) - (num / lcm(b, c)) - (num / lcm(a, c))
+				+ (num / lcm(a, lcm(b, c))));
+	}
+
+	// binary search
+	public int nthUglyNumber(int n, int a, int b, int c) {
+		int low = 1, high = 10, mid;
+		while (low < high) {
+			mid = low + (high - low) / 2;
+			if (count(a, b, c, mid) < n)
+				low = mid + 1;
+			else
+				high = mid;
+		}
+		return high;
+	}
+
 	@Test
 	public void test() {
-		System.out.println(nthUglyNumber(3,2,3,5));
+		System.out.println(Integer.MAX_VALUE > Math.pow(10, 9) ? true : false);
+		System.out.println(nthUglyNumber(4, 2, 3, 4));
 	}
 }

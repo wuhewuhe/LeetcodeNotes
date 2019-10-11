@@ -35,4 +35,5 @@ public class UglyNumberII264 {
 		}
 		return ugly[n-1];
 	}
+	
 }
