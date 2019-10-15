@@ -48,14 +48,15 @@ public class FindAllAnagramInString438 {
 			hashS[s.charAt(i) - 'a']++;
 			count++;
 			if (count == lenp) {
-				count--;
-				hashS[s.charAt(i + 1 - lenp)]--;
 				if (Arrays.equals(hashS, hashP))
 					list.add(i + 1 - lenp);
+				count--;
+				hashS[s.charAt(i + 1 - lenp) - 'a']--;
 			}
 		}
 		return list;
 	}
+
 
 	public static void main(String[] args) {
 		String s = "cbaebabacd", p = "abc";
