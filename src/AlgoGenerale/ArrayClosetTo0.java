@@ -1,4 +1,4 @@
-package Array;
+package AlgoGenerale;
 
 import java.util.Arrays;
 
