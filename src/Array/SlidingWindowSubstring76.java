@@ -1,7 +1,6 @@
 package Array;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 /**
  * @author mac Given a string S and a string T, find the minimum window in S
@@ -17,19 +16,39 @@ import java.util.Map;
  *         in S.
  */
 public class SlidingWindowSubstring76 {
-	public String minWindow(String s, String t) {
-		if (t.length() > s.length())
-			return "";
+	public static String minWindow(String s, String t) {
 
-		Map<Character, Integer> dictT = new HashMap<Character, Integer>();
+		int[] map = new int[128];
 		for (char c : t.toCharArray()) {
-			dictT.put(c, dictT.getOrDefault(c, 0) + 1);
+			map[c] += 1;
 		}
-
-		Map<Character, Integer> windowCounts = new HashMap<Character, Integer>();
-		int left = 0, right = 0, count = 0;
-		while (right < s.length()) {
-
+		int begin = 0;
+		int len = Integer.MAX_VALUE;
+		int count = t.length();
+		for (int left = 0, right = 0; right < s.length(); right++) {
+			char c = s.charAt(right);
+			map[c]--;
+			if (map[c] >= 0)
+				count--;
+			while (count == 0) {
+				char lc = s.charAt(left);
+				map[lc]++;
+				if (map[lc] > 0) {
+					if (right - left + 1 < len) {
+						begin = left;
+						len = right - left + 1;
+					}
+					count++;
+				}
+				left++;
+			}
 		}
+		return len == Integer.MAX_VALUE ? "" : s.substring(begin, begin + len);
+
+	}
+
+	public static void main(String[] args) {
+		String S = "ADOBECODEBANC", T = "ABC";
+		System.out.println(minWindow(S, T));
 	}
 }
