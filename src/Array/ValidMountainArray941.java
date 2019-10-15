@@ -31,9 +31,20 @@ public class ValidMountainArray941 {
 	public boolean validMountainArray(int[] nums) {
 		if (nums.length < 3)
 			return false;
-		int res = 0, mid = 0;
-
-		return mid < 0 && mid < nums.length - 1;
+		int curr = 0;
+		while (curr <= nums.length - 2) {
+			if (nums[curr] < nums[curr + 1])
+				curr++;
+			else break;
+		}
+		if (curr == 0 || curr == nums.length - 1)
+			return false;
+		while (curr <= nums.length - 2) {
+			if (nums[curr] > nums[curr + 1])
+				curr++;
+			else break;
+		}
+		return curr == nums.length - 1;
 	}
 
 	@Test
