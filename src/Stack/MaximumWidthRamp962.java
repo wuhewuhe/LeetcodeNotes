@@ -43,6 +43,7 @@ public class MaximumWidthRamp962 {
 
 	// revo n*logn
 	public int maxWidthRamp2(int[] A) {
+		return 0;
 		 
 	}
 
