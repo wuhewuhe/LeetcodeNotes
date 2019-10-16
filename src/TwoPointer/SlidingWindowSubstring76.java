@@ -1,4 +1,4 @@
-package Array;
+package TwoPointer;
 
 /**
  * @author mac Given a string S and a string T, find the minimum window in S
