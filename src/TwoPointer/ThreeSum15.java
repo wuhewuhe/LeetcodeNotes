@@ -53,8 +53,63 @@ public class ThreeSum15 {
 		return list;
 	}
 
+	public static List<List<Integer>> threeSum2(int[] nums) {
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		if (nums.length < 3)
+			return res;
+		Arrays.sort(nums);
+		if (nums[0] > 0)
+			return res;
+		int n = nums.length;
+		for (int i = 0; i < n - 2; i++) {
+			if (nums[i] > 0)
+				break;
+			if (nums[i] + nums[n - 1] + nums[n - 2] < 0)
+				continue;
+			if (i > 0 && nums[i] == nums[i - 1]) { // skip same result
+				continue;
+			}
+			int left = i + 1, right = n - 1;
+			while (left < right) {
+				if (nums[i] + nums[left] + nums[right] == 0) {
+					res.add(Arrays.asList(nums[i], nums[left], nums[right]));
+					left++;
+					right--;
+					while (left < n && nums[left] == nums[left - 1])
+						left++;
+					while (right > left && nums[right] == nums[right + 1])// right>i or right>0 can all pass
+						right--;
+				} else if (nums[i] + nums[left] + nums[right] < 0)
+					left++;
+				else
+					right--;
+			}
+		}
+		return res;
+	}
+
+	// permutation
+	public static List<List<Integer>> threeSum3(int[] nums) {
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		if (nums.length < 3)
+			return res;
+		Arrays.sort(nums);
+		if (nums[0] > 0)
+			return res;
+		int n = nums.length;
+		for (int i = 0; i < n - 2; i++) {
+			for (int j = i+1; j < n-1; j++) {
+				for (int k = j+1; k <= n-1; k++) {
+					if(nums[i]+nums[j]+nums[k] == 0)
+						res.add(Arrays.asList(nums[i], nums[j], nums[k]));
+				}
+			}
+		}
+		return res;
+	}
+
 	public static void main(String[] args) {
-		int[] nums = { -2, 0, 0, 2, 2 };
-		System.out.println(threeSum(nums));
+		int[] nums = { -1, 0, 1, 2, -1, -4 };
+		System.out.println(threeSum2(nums));
 	}
 }
