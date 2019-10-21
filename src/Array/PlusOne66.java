@@ -67,7 +67,7 @@ public class PlusOne66 {
 
 	@Test
 	public void test() {
-		int[] ar = { 2, 9 };
+		int[] ar = { 9, 9 };
 		System.out.println(PlusOne(ar));
 
 	}
