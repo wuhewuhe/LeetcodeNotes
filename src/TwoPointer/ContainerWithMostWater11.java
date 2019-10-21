@@ -1,4 +1,4 @@
-package Array;
+package TwoPointer;
 
 /**
  * @author he.wu
