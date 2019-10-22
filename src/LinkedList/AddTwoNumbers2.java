@@ -1,9 +1,9 @@
-package ListNode;
+package LinkedList;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ListNode.LinkedList.Node;
+import LinkedList.LinkedList.Node;
 
 /**
  * @author he.wu *You are given two non-empty linked lists representing two

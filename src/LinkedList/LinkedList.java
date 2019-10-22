@@ -1,4 +1,4 @@
-package ListNode;
+package LinkedList;
 
 //Java program to implement 
 //a Singly Linked List 
