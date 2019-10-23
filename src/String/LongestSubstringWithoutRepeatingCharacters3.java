@@ -72,7 +72,7 @@ public class LongestSubstringWithoutRepeatingCharacters3 {
 
 	@Test
 	public void test() {
-		String s = "abcabcbb";
+		String s = "pwwkew";
 		System.out.println(lengthOfLongestSubstring3(s));
 	}
 }
