@@ -53,7 +53,9 @@ public class SameTree100 {
 			return false;
 		if (p.val != q.val)
 			return false;
-		return isSameTree(p.right, q.right) && isSameTree(p.left, q.left);
+		boolean b1 = isSameTree(p.right, q.right);
+		boolean b2 = isSameTree(p.left, q.left);
+		return b1 && b2;
 	}
 
 	// iterator
