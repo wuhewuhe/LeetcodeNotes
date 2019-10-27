@@ -1,5 +1,7 @@
 package Tree;
 
+import org.junit.Test;
+
 /**
  * @author mac Given a binary tree, determine if it is height-balanced.
  * 
@@ -40,5 +42,19 @@ public class BalancedBinaryTree110 {
 			return -1;
 		}
 		return Math.max(left, right) + 1;
+	}
+
+	@Test
+	public void test() {
+		TreeNode p = new TreeNode(3);
+		TreeNode p1 = new TreeNode(9);
+		TreeNode p2 = new TreeNode(20);
+		TreeNode p3 = new TreeNode(15);
+		TreeNode p4 = new TreeNode(7);
+		p.left = p1;
+		p.right = p2;
+		p2.left=p3;
+		p2.left=p4;
+		System.out.println(isBalanced(p));
 	}
 }

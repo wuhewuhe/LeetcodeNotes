@@ -24,7 +24,10 @@ public class MaximumDepthBinaryTree104 {
 	public int maxDepth(TreeNode root) {
 		if (root == null)
 			return 0;
-		return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+		// return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+		int left = maxDepth(root.left);
+		int right = maxDepth(root.right);
+		return 1 + Math.max(left, right);
 	}
 
 	// Iterative bfs queue
@@ -52,19 +55,15 @@ public class MaximumDepthBinaryTree104 {
 
 	@Test
 	public void test() {
-		TreeNode p1 = new TreeNode(1);
-		TreeNode p2 = new TreeNode(2);
-		TreeNode q2 = new TreeNode(2);
-		TreeNode p3 = new TreeNode(3);
-		TreeNode q3 = new TreeNode(4);
-		TreeNode p32 = new TreeNode(4);
-		TreeNode q32 = new TreeNode(3);
-		p1.left = p2;
-		p1.right = q2;
+		TreeNode p = new TreeNode(3);
+		TreeNode p1 = new TreeNode(9);
+		TreeNode p2 = new TreeNode(20);
+		TreeNode p3 = new TreeNode(15);
+		TreeNode p4 = new TreeNode(7);
+		p.left = p1;
+		p.right = p2;
 		p2.left = p3;
-		p2.right = q3;
-		q2.left = p32;
-		q2.right = q32;
-		System.out.println(maxDepth2(p1));
+		p2.right = p4;
+		System.out.println(maxDepth(p));
 	}
 }
