@@ -22,19 +22,7 @@ public class BinaryTreeLevelOrder102 {
 		System.out.println(levelTravel2(p));
 	}
 
-	// recursion
-	private List<List<Integer>> levelTravel(TreeNode p) {
-		List<List<Integer>> list = new ArrayList<List<Integer>>();
-		if (p == null)
-			return list;
-		helper(p, list);
-		return list;
-	}
 
-	private void helper(TreeNode p, List<List<Integer>> list) {
-		// TODO Auto-generated method stub
-
-	}
 
 	// iterative queue bfs
 	private List<List<Integer>> levelTravel2(TreeNode p) {
