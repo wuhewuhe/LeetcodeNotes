@@ -35,10 +35,10 @@ public class BinaryTreeInorderTraversal94 {
 	}
 
 	// Iterate, simulation by stack
-	public List<Integer> inorderTraversal2(TreeNode node) {
+	public List<Integer> inorderTraversal2(TreeNode curr) {
 		List<Integer> res = new ArrayList<Integer>();
 		Stack<TreeNode> stack = new Stack<TreeNode>();
-		TreeNode curr = node;
+		//TreeNode curr = node;
 		while (curr != null || !stack.isEmpty()) {
 			while (curr != null)
 			{
