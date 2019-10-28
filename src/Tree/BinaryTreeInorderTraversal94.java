@@ -64,12 +64,16 @@ public class BinaryTreeInorderTraversal94 {
 
 	@Test
 	public void test() {
-		TreeNode p = new TreeNode(1);
-		TreeNode q = new TreeNode(2);
-		TreeNode r = new TreeNode(3);
-		p.right = q;
-		q.left = r;
-		inOrder(p);
-		list = inorderTraversal2(p);
+		TreeNode p = new TreeNode(3);
+		TreeNode p1 = new TreeNode(9);
+		TreeNode p2 = new TreeNode(20);
+		TreeNode p3 = new TreeNode(15);
+		TreeNode p4 = new TreeNode(7);
+		p.left = p1;
+		p.right = p2;
+		p2.left = p3;
+		p2.right = p4;
+		list = inorderTraversal(p);
+		System.out.println(list);
 	}
 }

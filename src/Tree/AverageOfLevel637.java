@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-
 import org.junit.Test;
 
 public class AverageOfLevel637 {
@@ -23,7 +22,6 @@ public class AverageOfLevel637 {
 	}
 
 	private List<Double> levelTravelAverage(TreeNode p) {
-		// TODO Auto-generated method stub
 		List<Double> res = new ArrayList<Double>();
 		if (p == null)
 			return res;
