@@ -29,7 +29,7 @@ public class BinaryTreePostOrder145 {
 		p.right = p2;
 		p2.left = p3;
 		p2.right = p4;
-		List<Integer> res = postorderTraversal2(p);
+		List<Integer> res = postorderTraversal(p);
 		System.out.println(res);
 	}
 
