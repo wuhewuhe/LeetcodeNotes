@@ -29,7 +29,7 @@ package Tree;
  *         5 / \ 2 6 \ \ 4 7
  */
 public class DeleteNode450 {
-	public TreeNode deleteNode(TreeNode root, int key) {
-
-	}
+//	public TreeNode deleteNode(TreeNode root, int key) {
+//
+//	}
 }

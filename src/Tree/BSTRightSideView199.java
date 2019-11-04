@@ -16,7 +16,7 @@ import org.junit.Test;
  * 
  *         1 <--- / \ 2 3 <--- \ \ 5 4 <---
  */
-public class BTRightSideView199 {
+public class BSTRightSideView199 {
 	public List<Integer> rightSideView(TreeNode root) {
 		List<Integer> res = new ArrayList<Integer>();
 		if (root == null)
