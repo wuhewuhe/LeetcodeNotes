@@ -35,14 +35,7 @@ public class RemoveNodeFromLinkedList19 {
 		return head;
 	}
 
-	public class ListNode {
-		int val;
-		ListNode next;
-
-		ListNode(int x) {
-			val = x;
-		}
-	}
+	
 
 	// one pass solution two pointer
 	public ListNode removeNthFromEnd2(ListNode head, int n) {
