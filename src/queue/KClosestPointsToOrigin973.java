@@ -1,5 +1,6 @@
 package queue;
 
+import java.util.Collections;
 import java.util.PriorityQueue;
 
 import org.junit.Test;
@@ -47,10 +48,25 @@ public class KClosestPointsToOrigin973 {
 
 	}
 
+	public int[][] kClosest2(int[][] points, int k) {
+		int[][] res = new int[k][2];
+		PriorityQueue<int[]> pq = new PriorityQueue<int[]>(
+				(int[] n1, int[] n2) -> (n2[0] * n2[0] + n2[1] * n2[1]) - (n1[0] * n1[0] + n1[1] * n1[1]));
+		for (int[] point : points) {
+			pq.offer(point);
+			if(pq.size()>k)
+				pq.poll();
+		}
+		int i = 0;
+		for(int[] point : pq)
+			res[i++] = point;
+		return res;
+	}
+
 	@Test
 	public void test() {
 		int[][] points = { { 3, 3 }, { 5, -1 }, { -2, 4 }, { 9, 3 } };
 		int k = 2;
-		System.out.println(kClosest(points, k));
+		System.out.println(kClosest2(points, k));
 	}
 }
