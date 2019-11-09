@@ -191,5 +191,4 @@ public class DesignLinkedList707 {
 		linkedList.addAtIndex(5,0); 
 		linkedList.addAtHead(6);
 	}
-
 }

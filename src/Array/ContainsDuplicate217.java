@@ -75,6 +75,5 @@ public class ContainsDuplicate217 {
 
 	@Test
 	public void test() {
-
 	}
 }

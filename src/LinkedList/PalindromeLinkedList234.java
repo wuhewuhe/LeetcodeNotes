@@ -1,8 +1,8 @@
 package LinkedList;
 
-import org.junit.Test;
+import java.util.Stack;
 
-import LinkedList.LinkedList.Node;
+import org.junit.Test;
 
 /**
  * @author he.wu Given a singly linked list, determine if it is a palindrome.
@@ -36,28 +36,21 @@ public class PalindromeLinkedList234 {
 		System.out.println(isPalindrome(n1));
 	}
 
-	public class ListNode {
-		int val;
-		ListNode next;
-
-		ListNode(int x) {
-			val = x;
+	private boolean isPalindrome(ListNode n1) {
+		if (n1 == null || n1.next == null)
+			return true;
+		Stack<Integer> stack = new Stack<Integer>();
+		ListNode ptr = n1;
+		while (ptr != null) {
+			stack.push(ptr.val);
+			ptr = ptr.next;
 		}
+		while (stack.size() > 0) {
+			if (n1.val != stack.pop())
+				return false;
+			n1 = n1.next;
+		}
+		return true;
 	}
 
-	// recursion
-	public boolean isPalindrome(ListNode head) {
-		ListNode pointer = head;
-		ListNode prev = head;
-		while (head != null) {
-			prev = head;
-			head = head.next;
-		}
-		if (head.val != pointer.val)
-			return false;
-		pointer = pointer.next;
-		prev.next = null;
-		return isPalindrome(head);
-
-	}
 }
