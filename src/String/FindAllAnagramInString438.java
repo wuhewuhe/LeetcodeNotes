@@ -40,10 +40,12 @@ public class FindAllAnagramInString438 {
 		if (s.length() == 0 || p.length() == 0 || p.length() > s.length())
 			return list;
 		int[] hashP = new int[26], hashS = new int[26];
+		//loop short string and store all his letters in an array
 		for (char c : p.toCharArray()) {
 			hashP[c - 'a']++;
 		}
-		int lenp = p.length(), lens = s.length(), count = 0;
+		int lenp = p.length(), lens = s.length(), count = 0;//count is the left side window's pointer
+		//i is a left pointer
 		for (int i = 0; i < lens; i++) {
 			hashS[s.charAt(i) - 'a']++;
 			count++;
