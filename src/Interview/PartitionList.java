@@ -1,4 +1,4 @@
-package Array;
+package Interview;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,9 +51,26 @@ public class PartitionList {
 		return res;
 	}
 
+	private static List<List<Integer>> PartitionList2(List<Integer> list, int k) {
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		if (list == null || list.size() == 0)
+			return res;
+		if (list.size() < k)
+				res.add(list.subList(0, list.size()));
+		int count = list.size() % k == 0 ? (list.size() / k) : (list.size() / k + 1);
+		for (int j = 0; j < count; j++) {
+			if ((j * k + k) <= list.size()) 
+				res.add(list.subList(j * k, j * k + k));
+			 else
+				res.add(list.subList(j * k, list.size()));
+			}
+		
+		return res;
+	}
+
 	public static void main(String[] args) {
 		List<Integer> nums = Arrays.asList(1, 2, 3, 4, 5);
 		int k = 2;
-		System.out.println(PartitionList(nums, k));
+		System.out.println(PartitionList2(nums, k));
 	}
 }
