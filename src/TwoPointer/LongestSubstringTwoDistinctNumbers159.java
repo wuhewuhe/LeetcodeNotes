@@ -58,8 +58,10 @@ public class LongestSubstringTwoDistinctNumbers159 {
 			while (count > 2) {
 				char tem = c[l++];
 				map.put(tem, map.get(tem) - 1);
-				if (map.get(tem) == 0)
+				if (map.get(tem) == 0) {
 					count--;
+					map.remove(tem);
+				}
 			}
 
 			res = Math.max(i - l + 1, res);
@@ -69,7 +71,7 @@ public class LongestSubstringTwoDistinctNumbers159 {
 
 	@Test
 	public void test() {
-		String s = "eceba";
+		String s = "eeeceba";
 		System.out.println(lengthOfLongestSubstringTwoDistinct2(s));
 	}
 }
