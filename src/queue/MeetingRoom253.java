@@ -8,8 +8,8 @@ import org.junit.Test;
 public class MeetingRoom253 {
 	@Test
 	public void test() {
-		int[][] room = { { 1, 5 }, { 2, 7 }, { 11, 14 }, { 8, 10 } };
-		System.out.println(meetingRoom2(room));
+		int[][] room = { { 1, 5 }, { 2, 7 }, { 11, 14 }, { 7, 10 } };
+		System.out.println(meetingRoom(room));
 	}
 
 	// priority queue

@@ -37,7 +37,6 @@ import org.junit.Test;
  */
 
 public class SplitLinkedListInParts725 {
-	// create new list Time(n+k) Space(max(n,k))
 	public ListNode[] splitListToParts(ListNode root, int k) {
 		ListNode curr = root;
 		int n = 0;
@@ -60,6 +59,31 @@ public class SplitLinkedListInParts725 {
 		return res;
 	}
 
+	// create new linked list
+	public ListNode[] splitListToParts2(ListNode root, int k) {
+		ListNode curr = root;
+		int n = 0;
+		while (curr != null) {
+			curr = curr.next;
+			n++;
+		}
+		int width = n / k, rem = n % k;
+		ListNode[] res = new ListNode[k];
+		curr = root;
+		for (int i = 0; i < res.length; i++) {
+			ListNode tem = new ListNode(0);
+			ListNode ptr = tem;
+			for (int j = 0; j < width + (i < rem ? 1 : 0); j++) {
+				ptr.next = curr;
+				ptr = ptr.next;
+				curr = curr.next;
+			}
+			ptr.next = null;
+			res[i] = tem.next;
+		}
+		return res;
+	}
+
 	@Test
 	public void test() {
 		ListNode a = new ListNode(1);
@@ -71,6 +95,6 @@ public class SplitLinkedListInParts725 {
 		b.next = c;
 		c.next = d;
 		d.next = e;
-		System.out.println(splitListToParts(a, 3));
+		System.out.println(splitListToParts2(a, 3));
 	}
 }
