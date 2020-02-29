@@ -1,6 +1,6 @@
 package LinkedList;
 
-import LinkedList.LinkedList.Node;
+import LinkedList.LinkedListT.Node;
 
 /**
  * @author he.wu Given a linked list, return the node where the cycle begins. If

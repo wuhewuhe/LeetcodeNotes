@@ -3,7 +3,7 @@ package LinkedList;
 import java.util.ArrayList;
 import java.util.List;
 
-import LinkedList.LinkedList.Node;
+import LinkedList.LinkedListT.Node;
 
 /**
  * @author he.wu *You are given two non-empty linked lists representing two
@@ -59,16 +59,16 @@ public class AddTwoNumbers2 {
 	}
 
 	public static void main(String[] args) {
-		LinkedList l1 = new LinkedList();
-		LinkedList l2 = new LinkedList();
+		LinkedListT l1 = new LinkedListT();
+		LinkedListT l2 = new LinkedListT();
 		l1 = l1.insert(l1, 2);
 		l1 = l1.insert(l1, 4);
 		l1 = l1.insert(l1, 3);
 		l2 = l2.insert(l2, 5);
 		l2 = l2.insert(l2, 6);
 		l2 = l2.insert(l2, 4);
-		LinkedList.printList(l1);
-		LinkedList.printList(l2);
+		LinkedListT.printList(l1);
+		LinkedListT.printList(l2);
 		System.out.println();
 		Node dummy = addTwoNumbers(l1.head,l2.head);
 		while(dummy != null) {

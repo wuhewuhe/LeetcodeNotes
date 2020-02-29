@@ -1,13 +1,13 @@
 package LinkedList;
 
-import static LinkedList.LinkedList.printList;
+import static LinkedList.LinkedListT.printList;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Test;
 
-import LinkedList.LinkedList.Node;
+import LinkedList.LinkedListT.Node;
 
 /**
  * @author he.wu Given a linked list, determine if it has a cycle in it.
@@ -72,7 +72,7 @@ public class LinkedListCycle141 {
 
 	@Test
 	public void test() {
-		LinkedList l1 = new LinkedList();
+		LinkedListT l1 = new LinkedListT();
 		l1 = l1.insert(l1, 2);
 		l1 = l1.insert(l1, 4);
 		l1 = l1.insert(l1, 3);

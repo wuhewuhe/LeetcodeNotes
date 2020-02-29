@@ -2,7 +2,7 @@ package LinkedList;
 
 //Java program to implement 
 //a Singly Linked List 
-public class LinkedList {
+public class LinkedListT {
 
 	Node head; // head of list
 
@@ -23,7 +23,7 @@ public class LinkedList {
 
 
 	// Method to insert a new node
-	public LinkedList insert(LinkedList list, int data) {
+	public LinkedListT insert(LinkedListT list, int data) {
 		// Create a new node with given data
 		Node new_node = new Node(data);
 		new_node.next = null;
@@ -49,7 +49,7 @@ public class LinkedList {
 	}
 
 	// Method to print the LinkedList.
-	public static void printList(LinkedList list) {
+	public static void printList(LinkedListT list) {
 		Node currNode = list.head;
 
 		System.out.print("LinkedList: ");
