@@ -1,9 +1,12 @@
 package Graph;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
+import java.util.Stack;
 
 import org.junit.Test;
 
@@ -104,10 +107,39 @@ public class CourseSchduel207 {
 		return true;
 	}
 
+	public boolean canFinish3(int numCourses, int[][] prerequisites) {
+		List<List<Integer>> courseToPre = new ArrayList<List<Integer>>();
+		for (int i = 0; i < numCourses; i++)
+			courseToPre.add(new ArrayList<Integer>());
+		for (int i = 0; i < prerequisites.length; i++)
+			courseToPre.get(prerequisites[i][0]).add(prerequisites[i][1]);
+
+		int used[] = new int[numCourses];
+		for (int i = 0; i < numCourses; i++) {
+			if (used[i] == 0 && !traverse(courseToPre, i, used))
+				return false;
+		}
+		return true;
+	}
+
+	public boolean traverse(List<List<Integer>> courseToPre, int index, int used[]) {
+		used[index] = -1; // node is under visiting
+		List<Integer> preList = courseToPre.get(index);
+		for (int i = 0; i < preList.size(); i++) {
+			int next = preList.get(i);
+			if (used[next] == 1) // the node has been visited
+				continue;
+			if (used[preList.get(i)] == -1 || !traverse(courseToPre, preList.get(i), used))
+				return false;
+		}
+		used[index] = 1; // visit finish
+		return true;
+	}
+
 	@Test
 	public void test() {
 		int[][] prerequisites = { { 3, 0 }, { 3, 1 }, { 4, 1 }, { 4, 2 }, { 5, 3 }, { 5, 4 } };
-		System.out.println(canFinish2(6, prerequisites));
+		System.out.println(canFinish3(6, prerequisites));
 	}
 
 }
