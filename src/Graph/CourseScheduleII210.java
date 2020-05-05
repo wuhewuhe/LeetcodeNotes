@@ -1,9 +1,7 @@
 package Graph;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
 
 import org.junit.Test;
 
@@ -88,6 +86,7 @@ public class CourseScheduleII210 {
 	@Test
 	public void test() {
 		int[][] prerequisites = { { 1, 0 }, { 2, 0 }, { 3, 1 }, { 3, 2 } };
-		System.out.println(findOrder(4, prerequisites));
+		int[] arr =findOrder(4, prerequisites);
+		System.out.println(Arrays.toString(arr));
 	}
 }

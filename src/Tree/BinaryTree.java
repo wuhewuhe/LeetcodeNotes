@@ -1,5 +1,12 @@
 package Tree;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
+
 public class BinaryTree {
 	TreeNode root;
 
@@ -65,14 +72,63 @@ public class BinaryTree {
 			System.out.println(TreeNode.val);
 		}
 	}
+
+	public void inOrderStore(TreeNode TreeNode) {
+		if (TreeNode != null) {
+			inOrder(TreeNode.left);
+			//System.out.println(TreeNode);
+			res.add(TreeNode.val);
+			inOrderStore(TreeNode.right);
+		}
+	}
+
+	public static List<Integer> res = new ArrayList<>();
 	
+	
+	public static int binarySearch(int i) {
+		return binarySearch(res,0,res.size(),i);
+	}
+
+	public static int binarySearch(List<Integer> list, int fromIndex, int toIndex, int key) {
+		int low = fromIndex;
+        int high = toIndex - 1;
+        
+        while (low <= high) {
+            int mid = low +(high-low);
+            int midVal = list.get(mid);
+
+            if (midVal < key)
+                low = mid + 1;
+            else if (midVal > key)
+                high = mid - 1;
+            else
+                return mid; // key found
+        }
+        return -(low + 1);  // key not found.
+	}
+
 	public static void main(String[] args) {
-		int[] nums = { 5, 4, 7, 2, 3, 1, 6, 8 };
+		//int[] nums = { 5, 4, 7, 2, 3, 1, 6, 8 };
 		BinaryTree bt = new BinaryTree();
-		for (int i : nums) {
+		Set<Integer> set = new TreeSet<>();
+		Random rm = new Random();
+		while (set.size() < 5) {
+			int next = rm.nextInt(10) + 1;
+			set.add(next);
+		}
+		for (int i : set) {
 			bt.buildTree(bt.root, i);
 		}
-		bt.inOrder(bt.root);
+		bt.inOrderStore(bt.root);
+		int ans = binarySearch(5);
+		res.forEach(x -> System.out.print(x + " "));
+		System.out.println();
+		System.out.println(ans);
+//		BinaryTree bt = new BinaryTree();
+//		for (int i : nums) {
+//			bt.buildTree(bt.root, i);
+//		}
+//		bt.inOrder(bt.root);
 	}
 
 }
