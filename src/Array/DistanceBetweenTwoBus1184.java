@@ -55,4 +55,12 @@ public class DistanceBetweenTwoBus1184 {
 		}
 		return d;
 	}
+
+	private int getDist2(int[] nums, int from, int to) {
+		int sum = 0, n = nums.length;
+		for (int i = from; i != to; i = (from + 1) % n) {
+			sum += nums[i];
+		}
+		return sum;
+	}
 }
